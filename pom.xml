@@ -20,8 +20,8 @@
   <groupId>eu.jasha.portaltests</groupId>
   <artifactId>portaltests</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>Etsy.com Stories with Java and Spring</name>
-  <description>JBehave stories verifying functionality of Etsy.com using Java and Spring</description>
+  <name>Portal Stories with Java and Spring</name>
+  <description>JBehave stories verifying functionality of A WEb and SOcial Mashup Engine using Java and Spring</description>
 
   <properties>
     <jbehave.core.version>3.6.1</jbehave.core.version>
