@@ -28,11 +28,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * Scenario: User creates a new account and logs in into the portal
- * Given the portal is running on "http://localhost:8080/portal"
- * When I go to the portal homepage
- * And Follow the new account link
- * Then I get the new account form
+ * Steps for the new user stories
  */
 public class NewUserSteps {
 

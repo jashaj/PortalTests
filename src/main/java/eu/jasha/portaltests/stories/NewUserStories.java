@@ -43,11 +43,7 @@ import static org.jbehave.core.reporters.Format.CONSOLE;
 import static org.jbehave.web.selenium.WebDriverHtmlOutput.WEB_DRIVER_HTML;
 
 /**
- * Created with IntelliJ IDEA.
- * User: jashaj
- * Date: 13-04-12
- * Time: 12:35
- * To change this template use File | Settings | File Templates.
+ * Handles story for new users
  */
 public class NewUserStories extends JUnitStories {
     public NewUserStories() {
