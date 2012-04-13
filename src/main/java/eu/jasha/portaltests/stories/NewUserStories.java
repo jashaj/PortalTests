@@ -1,4 +1,20 @@
-package eu.jasha.portaltests;
+/*
+ * Copyright 2012 Jasha Joachimsthal
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package eu.jasha.portaltests.stories;
 
 import java.util.List;
 
@@ -26,38 +42,41 @@ import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 import static org.jbehave.core.reporters.Format.CONSOLE;
 import static org.jbehave.web.selenium.WebDriverHtmlOutput.WEB_DRIVER_HTML;
 
-public class EtsyDotComStories extends JUnitStories {
-
-    public EtsyDotComStories() {
-
+/**
+ * Created with IntelliJ IDEA.
+ * User: jashaj
+ * Date: 13-04-12
+ * Time: 12:35
+ * To change this template use File | Settings | File Templates.
+ */
+public class NewUserStories extends JUnitStories {
+    public NewUserStories() {
         CrossReference crossReference = new CrossReference().withJsonOnly().withOutputAfterEachStory(true)
                 .excludingStoriesWithNoExecutedScenarios(true);
         ContextView contextView = new LocalFrameContextView().sized(640, 120);
         SeleniumContext seleniumContext = new SeleniumContext();
         SeleniumStepMonitor stepMonitor = new SeleniumStepMonitor(contextView, seleniumContext,
                 crossReference.getStepMonitor());
-        Format[] formats = new Format[] { new SeleniumContextOutput(seleniumContext), CONSOLE, WEB_DRIVER_HTML };
+        Format[] formats = new Format[]{new SeleniumContextOutput(seleniumContext), CONSOLE, WEB_DRIVER_HTML};
         StoryReporterBuilder reporterBuilder = new StoryReporterBuilder()
-                .withCodeLocation(codeLocationFromClass(EtsyDotComStories.class)).withFailureTrace(true)
+                .withCodeLocation(codeLocationFromClass(NewUserStories.class)).withFailureTrace(true)
                 .withFailureTraceCompression(true).withDefaultFormats().withFormats(formats)
                 .withCrossReference(crossReference);
 
         Configuration configuration = new SeleniumConfiguration().useSeleniumContext(seleniumContext)
                 .useFailureStrategy(new FailingUponPendingStep())
                 .useStoryControls(new StoryControls().doResetStateBeforeScenario(false)).useStepMonitor(stepMonitor)
-                .useStoryLoader(new LoadFromClasspath(EtsyDotComStories.class))
+                .useStoryLoader(new LoadFromClasspath(NewUserStories.class))
                 .useStoryReporterBuilder(reporterBuilder);
         useConfiguration(configuration);
 
-        ApplicationContext context = new SpringApplicationContextFactory("etsy-steps.xml").createApplicationContext();
+        ApplicationContext context = new SpringApplicationContextFactory("newuser-steps.xml").createApplicationContext();
         useStepsFactory(new SpringStepsFactory(configuration, context));
 
     }
 
     @Override
     protected List<String> storyPaths() {
-        return new StoryFinder().findPaths(codeLocationFromClass(this.getClass()).getFile(), asList("**/" + System.getProperty("storyFilter", "*")
-                + ".story"), null);
+        return new StoryFinder().findPaths(codeLocationFromClass(this.getClass()).getFile(), asList("**/newuser.story"), null);
     }
-
 }
