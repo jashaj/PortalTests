@@ -43,10 +43,10 @@ import static org.jbehave.core.reporters.Format.CONSOLE;
 import static org.jbehave.web.selenium.WebDriverHtmlOutput.WEB_DRIVER_HTML;
 
 /**
- * Handles story for new users
+ * Handles story for administrators
  */
-public class NewUserStories extends JUnitStories {
-    public NewUserStories() {
+public class AdminStories extends JUnitStories {
+    public AdminStories() {
         CrossReference crossReference = new CrossReference().withJsonOnly().withOutputAfterEachStory(true)
                 .excludingStoriesWithNoExecutedScenarios(true);
         ContextView contextView = new LocalFrameContextView().sized(640, 120);
@@ -66,13 +66,13 @@ public class NewUserStories extends JUnitStories {
                 .useStoryReporterBuilder(reporterBuilder);
         useConfiguration(configuration);
 
-        ApplicationContext context = new SpringApplicationContextFactory("newUser-steps.xml").createApplicationContext();
+        ApplicationContext context = new SpringApplicationContextFactory("admin-steps.xml").createApplicationContext();
         useStepsFactory(new SpringStepsFactory(configuration, context));
 
     }
 
     @Override
     protected List<String> storyPaths() {
-        return new StoryFinder().findPaths(codeLocationFromClass(this.getClass()).getFile(), asList("**/newUser.story"), null);
+        return new StoryFinder().findPaths(codeLocationFromClass(this.getClass()).getFile(), asList("**/deleteNewUser.story"), null);
     }
 }

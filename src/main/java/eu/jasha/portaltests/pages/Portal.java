@@ -54,4 +54,20 @@ public class Portal extends WebDriverPage {
     public WebElement getEmptyPageBox() {
         return findElement(By.id("emptyPageMessageWrapper"));
     }
+
+	 public void loginAsAdmin(String username, String password) {
+		  final WebElement loginForm=getLoginForm();
+		  loginForm.findElement(By.id("usernameField")).sendKeys(username);
+		  loginForm.findElement(By.id("passwordField")).sendKeys(password);
+		  loginForm.submit();
+	 }
+	 
+	 public void getAdminInterfaceLink() {
+		  final WebElement logoutLink=findElement(By.linkText("Logout"));
+	 }
+
+	 public void logout() {
+		  final WebElement logoutLink=findElement(By.linkText("Logout"));
+		  logoutLink.click();
+	 }
 }
