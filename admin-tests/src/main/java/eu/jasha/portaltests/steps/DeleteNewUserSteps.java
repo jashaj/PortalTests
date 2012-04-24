@@ -53,9 +53,57 @@ public class DeleteNewUserSteps {
 
     @Then("I see the admin interface link")
     public void getAdminInterfaceLink() {
-        // throws exception if id is not present
-        portal.getAdminInterfaceLink();
+		  //TODO: make sure the admin interface actually is loaded
+		  final WebElement adminInterfaceLink=portal.findElement(By.linkText("Admin interface"));
     }
+	 
+	 @When("I click the admin interface link")
+	 public void clickAdminInterfaceLink() {
+		  //TODO: there should be consequences if this fails.
+		  final WebElement adminInterfaceLink=portal.findElement(By.linkText("Admin interface"));
+		  portal.clickLink(adminInterfaceLink);
+	 }
+
+	 @Then("I see the admin interface")
+	 public void getAdminInterface() {
+		  final WebElement adminInterface=portal.findElement(By.tagName("title"));
+		  assertThat(title.getText().trim(),equalTo("Rave admin interface"));
+	 }
+	 
+	 @When("I click the Users link")
+	 public void clickUsersLink() {
+		  final WebElement usersLink=portal.findElement(By.linkText("Users"));
+		  portal.clickLink(usersLink);
+	 }
+
+	 @Then("I see a list of users")
+	 public void getUserList(){
+		  //Just need to make sure that the search button is there
+		  WebElement userList=portal.findElement(By.id("searchTerm"));
+	 }
+
+	 @When("I search for username \"$newuser\"")
+	 public void searchForNewUser(String newuser) {
+		  WebElement searchForm=portal.findElement(By.id("userSearchForm"));
+		  searchForm.findElement(By.id("")).sendKeys(newuser);
+		  searchForm.submit();
+	 }
+
+	 @Then("I see the information on \"$newuser\"")
+	 public void getNewUserInfo() {
+		  WebElement searchResultsHeading=portal.findElement(By.tagName("h2"));
+		  assertThat(searchResultsHeading.getText().trim(),equalTo("Showing 1 - 1 of 1 results that match 'newuser'"));
+	 }
+
+	 @When("I delete the the user \"$newuser\"")
+	 public void deleteNewUser() {
+	 }
+
+	 //See the list of users again, search, and not find "newuser" this time.
+
+	 @Then("I see \"No results found\"") 
+	 public void noResultsFound() {
+	 }
 
 	 @When("I log out")
 	 public void iLogOut() {

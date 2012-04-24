@@ -70,4 +70,9 @@ public class Portal extends WebDriverPage {
 		  final WebElement logoutLink=findElement(By.linkText("Logout"));
 		  logoutLink.click();
 	 }
+
+	 public void clickLink(WebElement linkToClick) {
+		  //TODO Should make sure this is clickable.
+		  linkToClick.click();
+	 }
 }
