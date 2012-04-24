@@ -66,7 +66,7 @@ public class NewUserStories extends JUnitStories {
                 .useStoryReporterBuilder(reporterBuilder);
         useConfiguration(configuration);
 
-        ApplicationContext context = new SpringApplicationContextFactory("newUser-steps.xml").createApplicationContext();
+        ApplicationContext context = new SpringApplicationContextFactory("newuser-steps.xml").createApplicationContext();
         useStepsFactory(new SpringStepsFactory(configuration, context));
 
     }
