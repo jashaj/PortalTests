@@ -55,14 +55,14 @@ public class AdminStories extends JUnitStories {
                 crossReference.getStepMonitor());
         Format[] formats = new Format[]{new SeleniumContextOutput(seleniumContext), CONSOLE, WEB_DRIVER_HTML};
         StoryReporterBuilder reporterBuilder = new StoryReporterBuilder()
-                .withCodeLocation(codeLocationFromClass(NewUserStories.class)).withFailureTrace(true)
+                .withCodeLocation(codeLocationFromClass(AdminStories.class)).withFailureTrace(true)
                 .withFailureTraceCompression(true).withDefaultFormats().withFormats(formats)
                 .withCrossReference(crossReference);
 
         Configuration configuration = new SeleniumConfiguration().useSeleniumContext(seleniumContext)
                 .useFailureStrategy(new FailingUponPendingStep())
                 .useStoryControls(new StoryControls().doResetStateBeforeScenario(false)).useStepMonitor(stepMonitor)
-                .useStoryLoader(new LoadFromClasspath(NewUserStories.class))
+                .useStoryLoader(new LoadFromClasspath(AdminStories.class))
                 .useStoryReporterBuilder(reporterBuilder);
         useConfiguration(configuration);
 

@@ -18,30 +18,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>eu.jasha.portaltests</groupId>
-  <artifactId>portaltests</artifactId>
+  <artifactId>newuser-tests</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>Portal Stories with Java and Spring</name>
-  <description>JBehave stories verifying functionality of A WEb and SOcial Mashup Engine using Java and Spring</description>
+  <name>New User Portal Stories with Java and Spring</name>
+  <description>JBehave stories verifying new user functionality</description>
 
-  <properties>
-    <jbehave.core.version>3.6.1</jbehave.core.version>
-    <jbehave.web.version>3.5.1</jbehave.web.version>
-    <jbehave.site.version>3.1.1</jbehave.site.version>
-    <selenium.version>2.20.0</selenium.version>
-    <meta.filter/>
-  </properties>
+  <parent>
+	 <groupId>eu.jasha.portaltests</groupId>
+	 <artifactId>portaltests</artifactId>
+	 <version>1.0-SNAPSHOT</version>
+	 <relativePath>../pom.xml</relativePath>
+  </parent>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.hamcrest</groupId>
-        <artifactId>hamcrest-library</artifactId>
-        <version>1.2.1</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
   <dependencies>
+	 <!-- This is the core-tests jar that we make in a previous module -->
+	 <dependency>
+		<groupId>eu.jasha.portaltests</groupId>
+		<artifactId>core-tests</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	 </dependency>
+
     <dependency>
       <groupId>org.jbehave</groupId>
       <artifactId>jbehave-core</artifactId>
@@ -104,10 +100,49 @@
         </plugin>
       </plugins>
     </pluginManagement>
+
+    <resources>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>${basedir}/src/main/stories</directory>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.jbehave</groupId>
+        <artifactId>jbehave-maven-plugin</artifactId>
+        <version>${jbehave.core.version}</version>
+        <executions>
+          <execution>
+            <id>unpack-view-resources</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>unpack-view-resources</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>embeddable-stories</id>
+            <phase>integration-test</phase>
+            <configuration>
+              <includes>
+                <include>**/*Stories*</include>
+              </includes>
+              <excludes />
+              <generateViewAfterStories>true</generateViewAfterStories>
+              <ignoreFailureInStories>true</ignoreFailureInStories>
+              <ignoreFailureInView>true</ignoreFailureInView>
+              <metaFilters>
+                <metaFilter>${meta.filter}</metaFilter>
+              </metaFilters>
+            </configuration>
+            <goals>
+              <goal>run-stories-as-embeddables</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
-  <modules>
-	 <module>core-tests</module>
-	 <module>newuser-tests</module>
-	 <module>admin-tests</module>
-  </modules>
 </project>
