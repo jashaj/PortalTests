@@ -43,10 +43,10 @@ import static org.jbehave.core.reporters.Format.CONSOLE;
 import static org.jbehave.web.selenium.WebDriverHtmlOutput.WEB_DRIVER_HTML;
 
 /**
- * Handles story for new users
+ * Handles story for administrators
  */
-public class NewUserStories extends JUnitStories {
-    public NewUserStories() {
+public class AdminStories extends JUnitStories {
+    public AdminStories() {
         CrossReference crossReference = new CrossReference().withJsonOnly().withOutputAfterEachStory(true)
                 .excludingStoriesWithNoExecutedScenarios(true);
         ContextView contextView = new LocalFrameContextView().sized(640, 120);
@@ -55,24 +55,24 @@ public class NewUserStories extends JUnitStories {
                 crossReference.getStepMonitor());
         Format[] formats = new Format[]{new SeleniumContextOutput(seleniumContext), CONSOLE, WEB_DRIVER_HTML};
         StoryReporterBuilder reporterBuilder = new StoryReporterBuilder()
-                .withCodeLocation(codeLocationFromClass(NewUserStories.class)).withFailureTrace(true)
+                .withCodeLocation(codeLocationFromClass(AdminStories.class)).withFailureTrace(true)
                 .withFailureTraceCompression(true).withDefaultFormats().withFormats(formats)
                 .withCrossReference(crossReference);
 
         Configuration configuration = new SeleniumConfiguration().useSeleniumContext(seleniumContext)
                 .useFailureStrategy(new FailingUponPendingStep())
                 .useStoryControls(new StoryControls().doResetStateBeforeScenario(false)).useStepMonitor(stepMonitor)
-                .useStoryLoader(new LoadFromClasspath(NewUserStories.class))
+                .useStoryLoader(new LoadFromClasspath(AdminStories.class))
                 .useStoryReporterBuilder(reporterBuilder);
         useConfiguration(configuration);
 
-        ApplicationContext context = new SpringApplicationContextFactory("newuser-steps.xml").createApplicationContext();
+        ApplicationContext context = new SpringApplicationContextFactory("admin-steps.xml").createApplicationContext();
         useStepsFactory(new SpringStepsFactory(configuration, context));
 
     }
 
     @Override
     protected List<String> storyPaths() {
-        return new StoryFinder().findPaths(codeLocationFromClass(this.getClass()).getFile(), asList("**/newuser.story"), null);
+        return new StoryFinder().findPaths(codeLocationFromClass(this.getClass()).getFile(), asList("**/deleteNewUser.story"), null);
     }
 }
