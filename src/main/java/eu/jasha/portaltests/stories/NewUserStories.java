@@ -73,6 +73,6 @@ public class NewUserStories extends JUnitStories {
 
     @Override
     protected List<String> storyPaths() {
-        return new StoryFinder().findPaths(codeLocationFromClass(this.getClass()).getFile(), asList("**/newUser.story"), null);
+        return new StoryFinder().findPaths(codeLocationFromClass(this.getClass()).getFile(), asList("**/newuser.story"), null);
     }
 }
