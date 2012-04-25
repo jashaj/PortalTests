@@ -73,7 +73,7 @@ public class NewUserSteps {
 
     @Then("A message appears \"$message\"")
     public void messagePresent(String message) {
-        final WebElement messageBox = portal.findElement(By.className("topbar-message"));
+        final WebElement messageBox = portal.findElement(By.className("alert"));
         assertThat(message, equalTo(messageBox.getText().trim()));
     }
 

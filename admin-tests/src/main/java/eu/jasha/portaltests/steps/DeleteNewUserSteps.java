@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import eu.jasha.portaltests.pages.Portal;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
@@ -67,42 +68,60 @@ public class DeleteNewUserSteps {
 	 @Then("I see the admin interface")
 	 public void getAdminInterface() {
 		  final WebElement adminInterface=portal.findElement(By.tagName("title"));
-		  assertThat(title.getText().trim(),equalTo("Rave admin interface"));
+		  assertThat(adminInterface.getText().trim(),startsWith("Rave admin interface"));
 	 }
 	 
-	 @When("I click the Users link")
-	 public void clickUsersLink() {
-		  final WebElement usersLink=portal.findElement(By.linkText("Users"));
-		  portal.clickLink(usersLink);
+	 @When("I click the \"$usersLinkName\" link")
+	 public void clickUsersLink(String usersLinkName) {
+		  final WebElement usersLink=portal.findElement(By.linkText(usersLinkName));
+		  usersLink.click();
 	 }
 
-	 @Then("I see a list of users")
+	 @Then("I get the user search form")
 	 public void getUserList(){
 		  //Just need to make sure that the search button is there
-		  WebElement userList=portal.findElement(By.id("searchTerm"));
+		  WebElement searchForm=portal.findElement(By.id("userSearchForm"));
 	 }
 
 	 @When("I search for username \"$newuser\"")
 	 public void searchForNewUser(String newuser) {
 		  WebElement searchForm=portal.findElement(By.id("userSearchForm"));
-		  searchForm.findElement(By.id("")).sendKeys(newuser);
+		  searchForm.findElement(By.id("searchTerm")).sendKeys(newuser);
 		  searchForm.submit();
 	 }
 
-	 @Then("I see the information on \"$newuser\"")
-	 public void getNewUserInfo() {
+	 @Then("I see the matches for \"$newuser\"")
+	 public void getUserSearchMatches() {
 		  WebElement searchResultsHeading=portal.findElement(By.tagName("h2"));
 		  assertThat(searchResultsHeading.getText().trim(),equalTo("Showing 1 - 1 of 1 results that match 'newuser'"));
+	 }
+	 
+	 @When("I click the link for information on \"$newuser\"")
+	 public void clickLinkForUser(String newuser){
+		  WebElement userLink=portal.findElement(By.linkText(newuser));
+		  userLink.click();
+	 }
+
+	 @Then("I see the information for user \"$newuser\"")
+	 public void getUserInformation(String newuser) {
+		  WebElement userProfileHeader=portal.findElement(By.tagName("h2"));
+		  assertThat(userProfileHeader.getText().trim(),equalTo(newuser));
 	 }
 
 	 @When("I delete the the user \"$newuser\"")
 	 public void deleteNewUser() {
+		  WebElement deleteUserProfileForm=portal.findElement(By.id("deleteUserProfile"));
+		  //Click the checkbox to confirm the deletion.
+		  deleteUserProfileForm.findElement(By.id("confirmdelete")).click();
+		  deleteUserProfileForm.submit();
 	 }
 
 	 //See the list of users again, search, and not find "newuser" this time.
 
-	 @Then("I see \"No results found\"") 
-	 public void noResultsFound() {
+	 @Then("I see \"$deletionConfirmationStatement\"") 
+	 public void noResultsFound(String deletionConfirmationStatement) {
+		  WebElement confirmationText=portal.findElement(By.tagName("h2"));
+		  assertThat(confirmationText.getText().trim(),startsWith(deletionConfirmationStatement));
 	 }
 
 	 @When("I log out")
