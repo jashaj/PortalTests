@@ -49,7 +49,7 @@ public class DeleteNewUserSteps {
 
     @When("I log in as an administrator with username \"$username\" and password \"$password\"")
     public void loginAsAdmin(String username, String password) {
-        portal.loginAsAdmin(username,password);
+        portal.login(username,password);
     }
 
     @Then("I see the admin interface link")
