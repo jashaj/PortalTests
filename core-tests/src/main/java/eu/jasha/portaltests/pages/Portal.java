@@ -50,24 +50,41 @@ public class Portal extends WebDriverPage {
     public WebElement getLoginForm() {
         return findElement(By.id("loginForm"));
     }
+	 
+	 public WebElement getOpenIdLoginForm() {
+		  return findElement(By.id("openIdForm"));
+	 }
 
     public WebElement getEmptyPageBox() {
         return findElement(By.id("emptyPageMessageWrapper"));
     }
 
-	 public void loginAsAdmin(String username, String password) {
+	 public void login(String username, String password) {
 		  final WebElement loginForm=getLoginForm();
 		  loginForm.findElement(By.id("usernameField")).sendKeys(username);
 		  loginForm.findElement(By.id("passwordField")).sendKeys(password);
 		  loginForm.submit();
 	 }
 	 
-	 public void getAdminInterfaceLink() {
-		  final WebElement logoutLink=findElement(By.linkText("Logout"));
+	 public void openIdLogin(String openIdUrl) {
+		  final WebElement openIdLogin=getOpenIdLoginForm();
+		  openIdLogin.findElement(By.id("openid_identifier")).sendKeys(openIdUrl);
+		  openIdLogin.submit();
 	 }
 
 	 public void logout() {
 		  final WebElement logoutLink=findElement(By.linkText("Logout"));
 		  logoutLink.click();
+	 }
+
+	 public void clickLink(WebElement linkToClick) {
+		  //TODO Should make sure this is clickable.
+		  linkToClick.click();
+	 }
+
+	 public WebElement findElement(By by) {
+		  //A little stupid workaround to slow down the execution.  Maybe there is a better way to do this.
+		  try {Thread.sleep(1000);} catch (Exception ex) { System.err.println(ex.getMessage());}
+		  return super.findElement(by);
 	 }
 }
