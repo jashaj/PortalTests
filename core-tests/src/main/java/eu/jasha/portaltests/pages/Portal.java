@@ -75,4 +75,10 @@ public class Portal extends WebDriverPage {
 		  //TODO Should make sure this is clickable.
 		  linkToClick.click();
 	 }
+
+	 public WebElement findElement(By by) {
+		  //A little stupid workaround to slow down the execution.  Maybe there is a better way to do this.
+		  try {Thread.sleep(1000);} catch (Exception ex) { System.err.println(ex.getMessage());}
+		  return super.findElement(by);
+	 }
 }

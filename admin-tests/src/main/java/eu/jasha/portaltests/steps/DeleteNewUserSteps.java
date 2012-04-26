@@ -120,7 +120,7 @@ public class DeleteNewUserSteps {
 
 	 @Then("I see \"$deletionConfirmationStatement\"") 
 	 public void noResultsFound(String deletionConfirmationStatement) {
-		  WebElement confirmationText=portal.findElement(By.tagName("h2"));
+		  WebElement confirmationText=portal.findElement(By.className("alert"));
 		  assertThat(confirmationText.getText().trim(),startsWith(deletionConfirmationStatement));
 	 }
 
@@ -134,5 +134,4 @@ public class DeleteNewUserSteps {
         final WebElement title = portal.findElement(By.tagName("title"));
         assertThat(title.getText().trim(), equalTo("Login - Rave"));
 	 }
-
 }
