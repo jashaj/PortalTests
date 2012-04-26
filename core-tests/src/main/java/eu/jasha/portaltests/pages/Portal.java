@@ -19,6 +19,7 @@ package eu.jasha.portaltests.pages;
 import org.jbehave.web.selenium.WebDriverPage;
 import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Portal extends WebDriverPage {
+    private final static int SLEEP_TIME = 1666; //ms
+    private final static int MAX_ATTEMPTS = 3;
 
     @Autowired
     public Portal(WebDriverProvider driverProvider) {
@@ -83,8 +86,24 @@ public class Portal extends WebDriverPage {
 	 }
 
 	 public WebElement findElement(By by) {
-		  //A little stupid workaround to slow down the execution.  Maybe there is a better way to do this.
-		  try {Thread.sleep(1000);} catch (Exception ex) { System.err.println(ex.getMessage());}
-		  return super.findElement(by);
+     return this.delayedFindElement(by, 1);
 	 }
+
+  // Do 3 attempts with increasing interval to find a DOM element.
+  // The DOM may not have finished when the check is fired.
+  private WebElement delayedFindElement(By by, int attempt) {
+    try {
+      return super.findElement(by);
+    } catch (NoSuchElementException e) {
+      if (attempt >= MAX_ATTEMPTS) {
+        throw e;
+      }
+      try {
+        Thread.sleep(attempt * SLEEP_TIME);
+      } catch (InterruptedException ie) {
+        throw new RuntimeException("Could not sleep thread", ie);
+      }
+      return this.delayedFindElement(by, attempt + 1);
+    }
+  }
 }
