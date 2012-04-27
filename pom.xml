@@ -109,6 +109,6 @@
 	 <module>core-tests</module>
 	 <module>newuser-tests</module>
 	 <module>admin-tests</module>
-	 <module>default-account-tests</module>
+	 <!--<module>default-account-tests</module>-->
   </modules>
 </project>
