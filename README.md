@@ -11,4 +11,4 @@ To run all tests, execute
 
     mvn clean install
 
-Individual stories that extend `JUnitStories` can be run a junit tests from within an IDE.
+Individual stories that extend `eu.jasha.portaltests.stories.PortalStories` can be run as junit tests in your IDE.
