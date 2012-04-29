@@ -15,7 +15,8 @@
   limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>eu.jasha.portaltests</groupId>
   <artifactId>admin-tests</artifactId>
@@ -24,83 +25,22 @@
   <description>JBehave stories for testing administrative functions</description>
 
   <parent>
-	 <groupId>eu.jasha.portaltests</groupId>
-	 <artifactId>portaltests</artifactId>
-	 <version>1.0-SNAPSHOT</version>
-	 <relativePath>../pom.xml</relativePath>
+    <groupId>eu.jasha.portaltests</groupId>
+    <artifactId>portaltests</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <dependencies>
-	 <!-- This is the core tests jar that we just made in a previous module -->
-	 <dependency>
-		<groupId>eu.jasha.portaltests</groupId>
-		<artifactId>core-tests</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	 </dependency>
-
+    <!-- This is the core tests jar that we just made in a previous module -->
     <dependency>
-      <groupId>org.jbehave</groupId>
-      <artifactId>jbehave-core</artifactId>
-      <version>${jbehave.core.version}</version>
-      <classifier>resources</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>org.jbehave.site</groupId>
-      <artifactId>jbehave-site-resources</artifactId>
-      <version>${jbehave.site.version}</version>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>org.jbehave.web</groupId>
-      <artifactId>jbehave-web-selenium</artifactId>
-      <version>${jbehave.web.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.seleniumhq.selenium</groupId>
-          <artifactId>selenium-java</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.seleniumhq.selenium.fluent</groupId>
-      <artifactId>fluent-selenium</artifactId>
-      <version>1.0</version>
-      <optional>true</optional>
-      <exclusions>
-        <exclusion>
-          <groupId>org.seleniumhq.selenium</groupId>
-          <artifactId>selenium-java</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-java</artifactId>
-      <version>${selenium.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jbehave</groupId>
-      <artifactId>jbehave-spring</artifactId>
-      <version>${jbehave.core.version}</version>
+      <groupId>eu.jasha.portaltests</groupId>
+      <artifactId>core-tests</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
   <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>2.1</version>
-          <configuration>
-            <source>1.5</source>
-            <target>1.5</target>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-
     <resources>
       <resource>
         <directory>${basedir}/src/main/resources</directory>
@@ -129,7 +69,7 @@
               <includes>
                 <include>**/*Stories*</include>
               </includes>
-              <excludes />
+              <excludes/>
               <generateViewAfterStories>true</generateViewAfterStories>
               <ignoreFailureInStories>true</ignoreFailureInStories>
               <ignoreFailureInView>true</ignoreFailureInView>

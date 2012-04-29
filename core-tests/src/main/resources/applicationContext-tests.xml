@@ -24,16 +24,14 @@
   http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 
-  <context:annotation-config />
+  <context:annotation-config/>
 
   <context:component-scan base-package="eu.jasha.portaltests"/>
 
-
-  <bean id="driverProvider" class="org.jbehave.web.selenium.FirefoxWebDriverProvider" >
-  </bean>
+  <bean id="driverProvider" class="org.jbehave.web.selenium.FirefoxWebDriverProvider"/>
 
   <bean id="lifecycleSteps" class="eu.jasha.portaltests.steps.LifecycleSteps">
-     <constructor-arg ref="driverProvider"/>
+    <constructor-arg ref="driverProvider"/>
   </bean>
 
 

@@ -25,16 +25,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import eu.jasha.portaltests.pages.Portal;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.startsWith;
 
 /**
  * Steps for the new user stories
  */
+@Step
 public class DeleteNewUserSteps {
 
     @Autowired
-    Portal portal;
+    private Portal portal;
 
     @When("I go to \"$url\"")
     public void goTo(String url) {
