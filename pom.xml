@@ -1,129 +1,356 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Copyright 2012 Jasha Joachimsthal
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-  -->
+<!-- Copyright 2012 Jasha Joachimsthal Licensed under the Apache License, 
+	Version 2.0 (the "License"); you may not use this file except in compliance 
+	with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>eu.jasha.portaltests</groupId>
-  <artifactId>portaltests</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>Portal Stories with Java and Spring</name>
-  <description>JBehave stories verifying functionality of A WEb and SOcial Mashup Engine using Java and Spring
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>eu.jasha.portaltests</groupId>
+	<artifactId>portaltests</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Portal Stories with Java and Spring</name>
+	<description>JBehave stories verifying functionality of A WEb and SOcial Mashup Engine using Java and Spring
   </description>
 
-  <properties>
-    <jbehave.core.version>3.6.1</jbehave.core.version>
-    <jbehave.web.version>3.5.1</jbehave.web.version>
-    <jbehave.site.version>3.1.1</jbehave.site.version>
-    <hamcrest.version>1.2.1</hamcrest.version>
-    <selenium.version>2.20.0</selenium.version>
-    <meta.filter/>
-    <!-- use UTF-8 encoding for filtered file copy -->
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+	<properties>
+		<javax.activation.version>1.1</javax.activation.version>
+		<javax.mail.version>1.4.4</javax.mail.version>
+		<apache.rave.version>0.12-SNAPSHOT</apache.rave.version>
+		<jbehave.core.version>3.6.1</jbehave.core.version>
+		<jbehave.web.version>3.5.1</jbehave.web.version>
+		<jbehave.site.version>3.1.1</jbehave.site.version>
+		<hamcrest.version>1.2.1</hamcrest.version>
+		<selenium.version>2.20.0</selenium.version>
+		<apache.wookie.version>0.9.2-incubating</apache.wookie.version>
+		<meta.filter />
+		<!-- use UTF-8 encoding for filtered file copy -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.hamcrest</groupId>
-        <artifactId>hamcrest-core</artifactId>
-        <version>${hamcrest.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.hamcrest</groupId>
-        <artifactId>hamcrest-library</artifactId>
-        <version>${hamcrest.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.hamcrest</groupId>
-        <artifactId>hamcrest-integration</artifactId>
-        <version>${hamcrest.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-  <dependencies>
-    <dependency>
-      <groupId>org.jbehave</groupId>
-      <artifactId>jbehave-core</artifactId>
-      <version>${jbehave.core.version}</version>
-      <classifier>resources</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>org.jbehave.site</groupId>
-      <artifactId>jbehave-site-resources</artifactId>
-      <version>${jbehave.site.version}</version>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>org.jbehave.web</groupId>
-      <artifactId>jbehave-web-selenium</artifactId>
-      <version>${jbehave.web.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.seleniumhq.selenium</groupId>
-          <artifactId>selenium-java</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.seleniumhq.selenium.fluent</groupId>
-      <artifactId>fluent-selenium</artifactId>
-      <version>1.0</version>
-      <optional>true</optional>
-      <exclusions>
-        <exclusion>
-          <groupId>org.seleniumhq.selenium</groupId>
-          <artifactId>selenium-java</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-java</artifactId>
-      <version>${selenium.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jbehave</groupId>
-      <artifactId>jbehave-spring</artifactId>
-      <version>${jbehave.core.version}</version>
-    </dependency>
-  </dependencies>
+		<!-- Cargo configuration properties -->
+        <cargo.version>1.2.1</cargo.version>
+        <!-- if you want a remote debugging on a different a address
+  			 override on command line with -Dcargo.debug.addres=xxxx -->
+        <cargo.debug.address>8000</cargo.debug.address>
+        <!-- if you want to start remote debugging session suspended
+  			 override on command line with -Dcargo.debug.suspend=y -->
+        <cargo.debug.suspend>n</cargo.debug.suspend>
+        <cargo.args />
+        <javaagent />
+        <!--
+        <rave.database.location>${java.io.tmpdir}${file.separator}rave-db</rave.database.location>
+        -->
+        <rave.database.location>/tmp/rave_db</rave.database.location>
+	</properties>
 
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>2.1</version>
-          <configuration>
-            <source>1.6</source>
-            <target>1.6</target>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
-  <modules>
-    <module>core-tests</module>
-    <module>newuser-tests</module>
-    <module>admin-tests</module>
-    <module>default-account-tests</module>
-  </modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-core</artifactId>
+				<version>${hamcrest.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-library</artifactId>
+				<version>${hamcrest.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-integration</artifactId>
+				<version>${hamcrest.version}</version>
+			</dependency>
+	    	<dependency>
+	            <groupId>org.apache.wookie</groupId>
+	            <artifactId>wookie</artifactId>
+	            <type>war</type>
+	            <version>${apache.wookie.version}</version>
+	        </dependency>
+        <dependency>
+            <groupId>org.apache.rave</groupId>
+            <artifactId>rave-shindig</artifactId>
+            <version>${apache.rave.version}</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rave</groupId>
+            <artifactId>rave-portal</artifactId>
+            <version>${apache.rave.version}</version>
+            <type>war</type>
+        </dependency>
+         <dependency>
+            <groupId>org.apache.rave</groupId>
+            <artifactId>rave-demo-gadgets</artifactId>
+            <version>${apache.rave.version}</version>
+            <type>war</type>
+        </dependency>
+          <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>${javax.mail.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>${javax.activation.version}</version>
+          </dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+	          <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>${javax.mail.version}</version>
+            <scope>test</scope>
+          </dependency>
+          <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>${javax.activation.version}</version>
+            <scope>test</scope>
+          </dependency>
+	    	<dependency>
+	            <groupId>org.apache.wookie</groupId>
+	            <artifactId>wookie</artifactId>
+	            <type>war</type>
+	            <scope>test</scope>
+	        </dependency>
+        <dependency>
+            <groupId>org.apache.rave</groupId>
+            <artifactId>rave-shindig</artifactId>
+            <type>war</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rave</groupId>
+            <artifactId>rave-portal</artifactId>
+            <type>war</type>
+            <scope>test</scope>
+        </dependency>
+         <dependency>
+            <groupId>org.apache.rave</groupId>
+            <artifactId>rave-demo-gadgets</artifactId>
+            <type>war</type>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>org.jbehave</groupId>
+			<artifactId>jbehave-core</artifactId>
+			<version>${jbehave.core.version}</version>
+			<classifier>resources</classifier>
+			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>org.jbehave.site</groupId>
+			<artifactId>jbehave-site-resources</artifactId>
+			<version>${jbehave.site.version}</version>
+			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>org.jbehave.web</groupId>
+			<artifactId>jbehave-web-selenium</artifactId>
+			<version>${jbehave.web.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-java</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium.fluent</groupId>
+			<artifactId>fluent-selenium</artifactId>
+			<version>1.0</version>
+			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-java</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jbehave</groupId>
+			<artifactId>jbehave-spring</artifactId>
+			<version>${jbehave.core.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+		    <!--
+			<plugin>
+	           <artifactId>maven-antrun-plugin</artifactId>
+	           <executions>
+	             <execution>
+	               <phase>initialize</phase>
+	               <goals>
+	                 <goal>run</goal>
+	               </goals>
+	               <configuration>
+	                 <tasks>
+	                   <delete>
+	                     <fileset dir="/tmp" includes="rave_db*" />
+	                   </delete>
+	                 </tasks>
+	               </configuration>
+	             </execution>
+	           </executions>
+	         </plugin>
+	         -->
+			<!--
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.4.1</version>
+				<executions>
+					<execution>
+						<phase>pre-integration-test</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${rave.database.location}</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			-->
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>${cargo.version}</version>
+				<executions>
+					<execution>
+						<id>start-container</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop-container</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+				    <!--
+					<wait>true</wait>
+					-->
+					<configuration>
+						<properties>
+							<cargo.jvmargs>
+                                <![CDATA[-Dh2.bindAddress="localhost" -Xdebug -XX:MaxPermSize=256m -Xrunjdwp:transport=dt_socket,address=${cargo.debug.address},server=y,suspend=${cargo.debug.suspend} -noverify ${javaagent} ${cargo.args}]]>
+							</cargo.jvmargs>
+							<cargo.tomcat.context.reloadable>true</cargo.tomcat.context.reloadable>
+						</properties>
+						<home>${project.build.directory}/tomcat6x</home>
+						<deployables>
+							<deployable>
+								<groupId>org.apache.wookie</groupId>
+								<artifactId>wookie</artifactId>
+								<type>war</type>
+								<properties>
+									<context>/wookie</context>
+								</properties>
+							</deployable>
+							<deployable>
+								<groupId>org.apache.rave</groupId>
+								<artifactId>rave-shindig</artifactId>
+								<type>war</type>
+								<properties>
+									<context>/ROOT</context>
+								</properties>
+							</deployable>
+							<deployable>
+								<groupId>org.apache.rave</groupId>
+								<artifactId>rave-demo-gadgets</artifactId>
+								<type>war</type>
+								<!-- I tried giving this name gagdets and it did not work. -->
+								<properties>
+									<context>/demogadgets</context>
+								</properties>
+							</deployable>
+							<deployable>
+								<groupId>org.apache.rave</groupId>
+								<artifactId>rave-portal</artifactId>
+								<type>war</type>
+								<properties>
+									<context>/portal</context>
+								</properties>
+							</deployable>
+						</deployables>
+						<configfiles>
+							<configfile>
+								<!-- TODO - Correct it when you move to the Rave project
+								<file>${project.basedir}/../rave-portal-resources/src/main/dist/conf/tomcat-users.xml</file>
+								  -->
+								  <file>./resources/tomcat-users.xml</file>
+								<todir>conf/</todir>
+								<tofile>tomcat-users.xml</tofile>
+							</configfile>
+						</configfiles>
+					</configuration>
+					<container>
+						<containerId>tomcat6x</containerId>
+						<timeout>180000</timeout>
+						<zipUrlInstaller>
+							<downloadDir>${settings.localRepository}/org/codehaus/cargo/cargo-container-archives</downloadDir>
+							<url>
+								http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.35/bin/apache-tomcat-6.0.35.tar.gz
+							</url>
+						</zipUrlInstaller>
+						<systemProperties>
+							<net.sf.ehcache.skipUpdateCheck>true</net.sf.ehcache.skipUpdateCheck>
+						</systemProperties>
+						<dependencies>
+							<dependency>
+								<groupId>javax.mail</groupId>
+								<artifactId>mail</artifactId>
+								<classpath>shared</classpath>
+							</dependency>
+							<dependency>
+								<groupId>javax.activation</groupId>
+								<artifactId>activation</artifactId>
+								<classpath>shared</classpath>
+							</dependency>
+						</dependencies>
+					</container>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<modules>
+		<module>core-tests</module>
+		<module>newuser-tests</module>
+		<module>admin-tests</module>
+		<module>default-account-tests</module>
+	</modules>
 </project>
