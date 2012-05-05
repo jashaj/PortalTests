@@ -209,45 +209,26 @@
       </plugins>
     </pluginManagement>
     <plugins>
-      <!--
-         <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                  <execution>
-                    <phase>initialize</phase>
-                    <goals>
-                      <goal>run</goal>
-                    </goals>
-                    <configuration>
-                      <tasks>
-                        <delete>
-                          <fileset dir="/tmp" includes="rave_db*" />
-                        </delete>
-                      </tasks>
-                    </configuration>
-                  </execution>
-                </executions>
-              </plugin>
-              -->
-      <!--
-         <plugin>
-           <artifactId>maven-clean-plugin</artifactId>
-           <version>2.4.1</version>
-           <executions>
-             <execution>
-               <phase>pre-integration-test</phase>
-             </execution>
-           </executions>
-           <configuration>
-             <filesets>
-               <fileset>
-                 <directory>${rave.database.location}</directory>
-                 <followSymlinks>false</followSymlinks>
-               </fileset>
-             </filesets>
-           </configuration>
-         </plugin>
-         -->
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <delete>
+                  <fileset dir="/tmp" includes="rave_db*"/>
+                </delete>
+              </target>
+            </configuration>
+            <inherited>false</inherited>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.codehaus.cargo</groupId>
         <artifactId>cargo-maven2-plugin</artifactId>
@@ -259,6 +240,7 @@
             <goals>
               <goal>start</goal>
             </goals>
+            <inherited>false</inherited>
           </execution>
           <execution>
             <id>stop-container</id>
@@ -266,6 +248,7 @@
             <goals>
               <goal>stop</goal>
             </goals>
+            <inherited>false</inherited>
           </execution>
         </executions>
         <configuration>
