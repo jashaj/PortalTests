@@ -1,5 +1,8 @@
 # Portal Tests
-Integration tests for A WEb and SOcial Mashup Engine
+
+* This repository is no longer maintained*
+
+Integration tests for [A WEb and SOcial Mashup Engine](https://rave.apache.org/)
 
 ## System requirements
   * Java 6 or up
