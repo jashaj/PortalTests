@@ -1,6 +1,6 @@
 # Portal Tests
 
-* This repository is no longer maintained*
+**This repository is no longer maintained**
 
 Integration tests for [A WEb and SOcial Mashup Engine](https://rave.apache.org/)
 
